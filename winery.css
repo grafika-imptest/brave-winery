@@ -672,3 +672,10 @@ figure.x-hero-img{aspect-ratio:auto}figure.x-hero-img img{aspect-ratio:21/9;bord
 @media (max-width:1000px){.x-cards.three,.x-quick,.x-hub-tiles{grid-template-columns:1fr 1fr}.x-steps{grid-template-columns:1fr 1fr}.x-year{grid-template-columns:1fr 1fr 1fr}}
 @media (max-width:760px){.x-cards.three,.x-quick,.x-two,.x-split,.x-teaser,.x-doc,.x-faqpage,.x-site,.x-reviews,.xbook-steps,.xbook-grid,.x-principles{grid-template-columns:1fr}.x-hub-tiles,.x-steps{grid-template-columns:1fr 1fr}.x-year{grid-template-columns:1fr}.x-toc,.x-faq-side,.x-rev-sum,.xbook-sum{position:static}.x-hero-img{aspect-ratio:4/3}figure.x-hero-img img{aspect-ratio:4/3}.x-split-img{aspect-ratio:4/3}.x-nums.big b{font-size:44px}}
 .xcal-grid button{aspect-ratio:auto;height:40px}
+
+/* patička: Vytvořilo IMPnet */
+.footer-bottom{align-items:center;flex-wrap:wrap}
+.made-by{display:inline-flex;align-items:center;gap:10px;color:var(--muted);transition:color .3s var(--ease)}
+.made-by:hover{color:var(--ink,#1d1a17)}
+.impnet-logo{display:inline-block;width:84px;aspect-ratio:500.68/135.71;background:currentColor;-webkit-mask:url(./assets/impnet-logo.svg) center/contain no-repeat;mask:url(./assets/impnet-logo.svg) center/contain no-repeat}
+@media (min-width:761px){.footer-bottom{padding-right:calc(var(--pad) + 84px)}}
