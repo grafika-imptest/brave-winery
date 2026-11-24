@@ -23,7 +23,7 @@
   colors:[['Standard','#9a9a92']],
   categoryImages:{white:'s-white',red:'s-red',rose:'s-rose',sparkling:'s-sparkling',all:'s-vineyard',sale:'s-giftbox'},
   categoryNotes:{white:'svěží · citrus · minerálie',red:'višeň · koření · dub',rose:'jahoda · léto · terasa',sparkling:'bublinky · oslavy'},
-  editorialImage:'s-tasting',featureImage:'s-vineyard',
+  editorialImage:'s-tasting',inspoImage:'s-harvest',adviceImage:'s-winemaker',featureImage:'s-vineyard',
   articles:[{id:'jak-degustovat',image:'s-tasting',tag:'Víno · 5 min čtení',title:'Jak správně degustovat víno.'},{id:'od-vinice-do-sklenice',image:'s-harvest',tag:'Vinice · 6 min čtení',title:'Cesta vína od vinice až do sklenice.'},{id:'vino-jako-darek',image:'s-giftbox',tag:'Tipy · 4 min čtení',title:'Víno jako dárek: jak vybrat správnou láhev.'}],
   journalTitle:'Ze sklepa i z vinice.',newsletterTitle:'Nové ročníky<br>jako první.',newsletterDescription:'Novinky z vinařství, termíny degustací a nové ročníky. Jednou za měsíc, bez spamu.',footerTagline:'Rodinné vinařství ze srdce Moravy.',checkoutTitle:'O krok blíž ke sklence.',search:'Ryzlink, rosé, ročník 2022…',
   freeShipping:1500}};

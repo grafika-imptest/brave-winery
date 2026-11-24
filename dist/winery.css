@@ -524,3 +524,18 @@ h1 em,h2 em{font-weight:400}
 .hp-copy{bottom:calc(clamp(80px,13vh,130px) + var(--cta-h,170px) + clamp(22px,3.5vh,40px))}
 /* silnější ztmavení pod navigací – čitelné bílé menu i na světlé obloze */
 .hp-bg:after{background:linear-gradient(180deg,rgba(18,14,10,.62) 0%,rgba(18,14,10,.34) 9%,rgba(18,14,10,.12) 18%,rgba(18,14,10,0) 28%),linear-gradient(0deg,rgba(18,14,10,.55) 0%,rgba(18,14,10,.3) 38%,rgba(18,14,10,0) 62%)}
+
+/* HP: zelený pás „Objevte všechna naše vína“ (stejný jako na detailu bílého vína) */
+.hp-discover{--tone:#59603F;--on:#F7F1E6}
+
+/* Mega menu náhled: vrstvy se prolínají, žádné společné časovače */
+.mega-image.has-layers:after{display:none}
+.mega-image .mi-layer{position:absolute;inset:0;opacity:0;transition:opacity .4s var(--ease)}
+.mega-image .mi-layer.on{opacity:1}
+.mega-image .mi-gone{opacity:0!important;transition:opacity .4s var(--ease)}
+.mega-image .mi-layer .mi-main{width:100%;height:100%;object-fit:cover}
+.mega-image .mi-layer:not(.is-bottle):after{content:'';position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(0deg,rgba(0,0,0,.42),rgba(0,0,0,0));pointer-events:none}
+.mega-image .mi-layer.is-bottle{background:var(--paper)}
+.mega-image .mi-layer.is-bottle .mi-main{position:relative;z-index:1;object-fit:contain;padding:7% 0 6%;filter:drop-shadow(0 16px 14px rgba(40,30,20,.16))}
+.mega-image .mi-layer .mi-illus{position:absolute;left:50%;top:50%;width:auto;height:118%;transform:translate(-50%,-50%);opacity:.5;object-fit:contain;pointer-events:none}
+.mega-image .mi-layer .mi-cap{position:absolute;left:20px;bottom:16px;z-index:2;color:#fff;font-size:20px;letter-spacing:-.02em;text-shadow:0 1px 20px #0006}
