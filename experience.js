@@ -81,7 +81,7 @@ function reviewsSection(){return `<section class="section reviews">${sectionHead
 function visitSection(){return `<section class="visit"><figure class="visit-media" data-reveal-img>${img('s-vinoteka','Vinotéka a degustační místnost vinařství','',false,'(max-width: 760px) 100vw, 55vw')}</figure><div class="visit-copy"><p class="eyebrow">Kde nás najdete</p><h2 data-split>Přijeďte ochutnat.</h2><p>Vinotéka i sklep jsou na jedné adrese. Zaparkujete přímo u dvora.</p><dl class="visit-facts"><div><dt>Adresa</dt><dd>Vinařská 128, 691 42 Valtice</dd></div><div><dt>Otevřeno</dt><dd>Po–Pá 9:00–17:00 · So 9:00–12:00<br>Degustace i mimo hodiny po dohodě</dd></div><div><dt>Telefon</dt><dd><a href="tel:+420519352200">+420 519 352 200</a></dd></div></dl><a class="btn dark" href="https://www.google.com/maps/search/?api=1&query=Valtice" target="_blank" rel="noopener" data-magnetic>Naplánovat cestu <span>↗</span></a></div></section>`;}
 function journalSection(){return `<section class="section journal">${sectionHead('Z blogu',THEME.journalTitle,'Všechny články','#page/blog')}<div class="journal-grid">${journalCards()}</div></section>`;}
 function instaSection(){const pics=['s-grapes','s-breakfast','s-rose','s-sparkling','s-red','s-giftbox'];return `<section class="insta"><div class="insta-head"><p class="eyebrow">Ze života vinařství</p><a class="text-link" href="#page/blog">@bravewinery <span>↗</span></a></div><div class="insta-grid">${pics.map(n=>`<a href="#page/blog" data-cursor="Otevřít">${img(n,'Fotografie ze života vinařství','',false,'(max-width: 760px) 50vw, 17vw')}</a>`).join('')}</div></section>`;}
-home=function(){return hero()+introSection()+linesSection()+seriesSection()+terroirSection()+storySection()+timelineSection()+catListSection()+quizSection()+experiencesSection()+awardsSection()+reviewsSection()+visitSection()+journalSection()+instaSection()+benefits();};
+home=function(){return hero()+introSection()+linesSection()+seriesSection()+`<a class="pd-discover hp-discover" href="#catalog/all" data-cursor="Vinotéka"><span><em>Objevte</em> všechna naše <u>vína</u></span></a>`+terroirSection()+storySection()+timelineSection()+catListSection()+quizSection()+experiencesSection()+awardsSection()+reviewsSection()+visitSection()+journalSection()+instaSection()+benefits();};
 
 /* ---------- Detail vína ---------- */
 function variantInputs(p,quick=false){return `<input type="hidden" name="color" value="Standard"><input type="hidden" ${quick?'name="warranty"':'id="warranty"'} value="0"><input type="hidden" ${quick?'name="surface"':'id="surface"'} value="0,75 l">`;}
@@ -168,9 +168,13 @@ window.setupScrollScenes=function(){const h=$('[data-parallax-hero]');if(h){h.cl
 
 
 /* ---------- Mega menu: lahev jako čistý výřez s rytinou místo fotky s popiskem ---------- */
-{const baseMega=megaPreview;megaPreview=function(name,label,href){const box=$('#mega-menu .mega-image');baseMega(name,label,href);if(!box)return;
- let il=$('.mi-illus',box);if(!il){il=document.createElement('img');il.className='mi-illus';il.alt='';il.setAttribute('aria-hidden','true');box.prepend(il);}
- clearTimeout(box._b);box._b=setTimeout(()=>{const b=/^b-/.test(name||'');box.classList.toggle('is-bottle',b);if(b)il.src='./assets/m/'+name.replace(/^b-/,'i-')+'-s.webp';},140);};}
+{megaPreview=function(name,label,href){const box=$('#mega-menu .mega-image');if(!box||box.dataset.current===name)return;box.dataset.current=name;if(href)box.href=href;
+ const bottle=/^b-/.test(name||''),L=document.createElement('div');L.className='mi-layer'+(bottle?' is-bottle':'');
+ L.innerHTML=bottle?`<img class="mi-illus" src="./assets/m/${name.replace(/^b-/,'i-')}-s.webp" alt="" aria-hidden="true"><img class="mi-main" src="./assets/m/${name}-s.webp" alt="${esc(label||'')}">`
+  :`<img class="mi-main" src="./assets/m/${name}-s.webp" srcset="./assets/m/${name}-s.webp 720w, ./assets/m/${name}.webp 1600w" sizes="30vw" alt="${esc(label||'')}"><span class="mi-cap">${esc(label||'')}</span>`;
+ box.classList.add('has-layers');box.querySelectorAll(':scope>.mi-layer:not(.on)').forEach(x=>x.remove());box.appendChild(L);const im=L.querySelector('.mi-main');let shown=0;
+ const show=()=>{if(shown||!L.isConnected)return;shown=1;const all=[...box.querySelectorAll(':scope>.mi-layer')];if(all[all.length-1]!==L){L.remove();return;}requestAnimationFrame(()=>{const al=[...box.querySelectorAll(':scope>.mi-layer')];if(!L.isConnected||al[al.length-1]!==L){L.remove();return;}L.classList.add('on');[...box.children].forEach(c=>{if(c!==L&&!c.classList.contains('mi-gone')&&(c.classList.contains('mi-layer')||c.tagName==='IMG'||c.tagName==='SPAN')){c.classList.add('mi-gone');setTimeout(()=>c.remove(),450);}});});};
+ if(im.complete&&im.naturalWidth)show();else{im.onload=show;im.onerror=show;setTimeout(show,900);}};}
 /* ---------- Seznam kategorií s obrázkem u kurzoru ---------- */
 function setupCatList(){const list=$('[data-cat-list]');if(!list)return;const fl=$('.cat-float',list.parentElement),ims=$$('.cf-w',fl);let tick=0;let tx=0,ty=0,cx=0,cy=0,raf=0;const loop=()=>{cx+=(tx-cx)*.14;cy+=(ty-cy)*.14;fl.style.transform=`translate3d(${cx}px,${cy}px,0) translate(-50%,-50%)`;raf=Math.abs(tx-cx)+Math.abs(ty-cy)>.3?requestAnimationFrame(loop):0;};
  list.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=list.parentElement.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;if(!raf)raf=requestAnimationFrame(loop);});
@@ -196,7 +200,7 @@ document.addEventListener('focusin',e=>{const f=e.target.closest?.('form[data-fo
 applyThemeChrome();render();ageGate();if(!read('brave-consent',null))$('#cookie-banner').hidden=false;
 
 /* ---------- „Objevte všechna naše vína“: text se při scrollu posouvá doleva ---------- */
-(()=>{let f=0;const paint=()=>{f=0;const el=document.querySelector('.pd-discover');if(!el||matchMedia('(prefers-reduced-motion: reduce)').matches)return;const r=el.getBoundingClientRect(),vh=innerHeight;if(r.bottom<0||r.top>vh)return;const p=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));el.style.setProperty('--dx',(p*-1).toFixed(4));};
+(()=>{let f=0;const paint=()=>{f=0;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const vh=innerHeight;document.querySelectorAll('.pd-discover').forEach(el=>{const r=el.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;const p=Math.min(1,Math.max(0,(vh-r.top)/(vh+r.height)));el.style.setProperty('--dx',(p*-1).toFixed(4));});};
  const req=()=>{if(!f)f=requestAnimationFrame(paint)};addEventListener('scroll',req,{passive:true});addEventListener('resize',req,{passive:true});addEventListener('hashchange',()=>setTimeout(req,300));})();
 
 /* Vinné řady: připnutá sekce, stopa jede doleva podle scrollu */
