@@ -36,3 +36,14 @@ Vína, ceny, ocenění, recenze, trasy i rezervace jsou ilustrační. Adresa a t
 - „Vyberte si podle chuti“: plovoucí náhled střídá výřezy lahví dané kategorie.
 - Soutěže jsou **fiktivní** (Salon moravských vín, DWC Vienna, Bohemia Wine Trophy, Grand Prix Vitis); nálepky jen stylem připomínají skutečné. Generuje je `node tools/medals.mjs` → `dist/assets/m/medal-<soutěž>-<kov>.webp`. Skutečná loga soutěží nepoužívat bez licence pořadatele.
 - Nadpisové písmo: **Ogg** (Adobe Fonts, kit `oia3cnp`, jen Regular + Italic). Při nasazení na novou doménu ji přidat do povolených domén kitu na fonts.adobe.com, jinak se písmo nenačte.
+
+## Doplněno podle původního dema (2026-11-24)
+
+`dist/winery-extra.js` (načítá se po experience.js) přepisuje stránky podle demo.bravewinery.cz:
+degustace a ubytování s rezervací (kalendář, časy, přídavky, platby), doprava a platba
+(Balíkovna, Zásilkovna, PPL, Balík do ruky, DPD, osobní odběr, závoz; dobírka 30 / PPL 20 Kč),
+naše vinice (tratě Kamenná, Pod Pálavou, Stará hora), kontakty s týmem, FAQ (21 otázek
+s hledáním), oceněná vína s filtry, blog s rubrikami, rozcestník nad výpisem všech vín,
+detail vína (technické údaje, recenze, karton, odkud je) a volba jazyka / měny / země.
+Závozové trasy: mapa Leaflet + OSM (cdnjs), data ROUTES v experience.js.
+Obecný e-mail je info@bravewinery.cz (původní demo uvádí osobní adresu, tu nepřebíráme).
