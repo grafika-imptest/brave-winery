@@ -522,3 +522,5 @@ h1 em,h2 em{font-weight:400}
 .hp-copy h1{margin-bottom:0}
 .hp-bg:after{background:linear-gradient(180deg,rgba(18,14,10,.32) 0%,rgba(18,14,10,0) 17%),linear-gradient(0deg,rgba(18,14,10,.55) 0%,rgba(18,14,10,.3) 38%,rgba(18,14,10,0) 62%)}
 .hp-copy{bottom:calc(clamp(80px,13vh,130px) + var(--cta-h,170px) + clamp(22px,3.5vh,40px))}
+/* silnější ztmavení pod navigací – čitelné bílé menu i na světlé obloze */
+.hp-bg:after{background:linear-gradient(180deg,rgba(18,14,10,.62) 0%,rgba(18,14,10,.34) 9%,rgba(18,14,10,.12) 18%,rgba(18,14,10,0) 28%),linear-gradient(0deg,rgba(18,14,10,.55) 0%,rgba(18,14,10,.3) 38%,rgba(18,14,10,0) 62%)}
