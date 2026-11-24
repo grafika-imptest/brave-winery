@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#FBF8F3">
+  <title>Brave Winery — Vína ze srdce Moravy</title>
+  <meta name="description" content="Interaktivní ukázka e-shopu Brave Winery pro rodinné vinařství: vinotéka, degustace, ubytování a kvíz pro výběr vína.">
+  <link rel="icon" href="./favicon.svg?v=winery" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/oia3cnp.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap">
+  <link rel="preload" as="image" href="./assets/m/hero-bg.webp" imagesrcset="./assets/m/hero-bg-s.webp 1280w, ./assets/m/hero-bg.webp 2560w" imagesizes="100vw">
+  <link rel="stylesheet" href="./styles.css?v=26">
+  <link rel="stylesheet" href="./winery.css?v=26">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="./presets.js?v=26" defer></script>
+  <script src="./app.js?v=26" defer></script>
+  <script src="./experience.js?v=26" defer></script>
+  <script src="./motion.js?v=26" defer></script>
+</head>
+<body data-style="winery">
+<a class="skip" href="#main">Přeskočit na obsah</a>
+<div class="announcement"><span class="announcement-side">Rodinné vinařství · Valtice</span><div class="announcement-center"><button data-action="announcement-prev" aria-label="Předchozí oznámení">‹</button><span id="announcement-text">Doprava zdarma při nákupu nad 1 500 Kč</span><button data-action="announcement-next" aria-label="Další oznámení">›</button></div><a class="announcement-side" href="#page/doprava">Doprava a platba ↗</a></div>
+<header id="site-header">
+ <div class="header-main">
+  <button class="icon mobile-menu" data-action="menu" aria-label="Otevřít menu"><span class="burger" aria-hidden="true"><i></i><i></i></span></button>
+  <a class="logo" href="#home" aria-label="Brave Winery — domů"><img class="logo-dark" src="./assets/brave-winery-logo.svg" alt="Brave Winery" width="101.5" height="33"><img class="logo-light" src="./assets/brave-winery-logo-white.svg" alt="" width="101.5" height="33" aria-hidden="true"></a>
+  <nav class="category-nav" aria-label="Druhy vín"><a href="#catalog/all">Všechna vína</a><a href="#catalog/white">Bílá vína</a><a href="#catalog/red">Červená vína</a><a href="#catalog/rose">Růžová vína</a><a href="#catalog/sparkling">Šumivá vína</a><a class="sale-link" href="#catalog/sale">Výhodné nabídky</a></nav>
+  <div class="header-actions"><nav class="editorial-nav" aria-label="Vinařství"><a href="#page/nase-vinice">Vinařství</a><a href="#page/degustace">Degustace</a><a href="#page/ubytovani">Ubytování</a></nav><button class="language" data-action="language" aria-label="Jazyk a měna">CZ / CZK⌄</button><button class="icon" data-action="search" aria-label="Vyhledávání" data-icon="search"></button><button class="icon account-icon" data-action="account" aria-label="Můj účet" data-icon="user"></button><a class="icon compare-icon" href="#compare" aria-label="Porovnání vín" data-icon="compare"></a><a class="icon" href="#wishlist" aria-label="Oblíbená vína" data-icon="heart"><span id="wish-count" class="counter"></span></a><button class="icon bag" data-action="cart" aria-label="Otevřít košík" data-icon="bag"><span id="cart-count" class="counter">0</span></button></div>
+ </div>
+ <div id="mega-menu" class="mega-menu" hidden data-lenis-prevent></div>
+</header>
+<main id="main" tabindex="-1"></main>
+<footer>
+ <div class="footer-top"><div><p class="eyebrow">Ze sklepa jednou za měsíc</p><h2>Nové ročníky<br>jako první.</h2><p>Novinky z vinařství, termíny degustací a nové ročníky. Bez spamu.</p></div><form id="newsletter"><label for="newsletter-email">Váš e-mail</label><div class="email-line"><input id="newsletter-email" type="email" placeholder="vas@email.cz" required><button aria-label="Přihlásit k newsletteru">↗</button></div><label class="checkline"><input type="checkbox" required> Souhlasím se <a href="#page/zpracovani-osobnich-udaju">zpracováním osobních údajů</a>.</label><small>Ukázkový formulář. E-mail se nikam neodesílá.</small></form></div>
+ <div class="footer-links"><div class="footer-brand"><p>Rodinné vinařství ze srdce Moravy.</p><p class="muted">Interaktivní demo šablony Brave Winery.<br>Vína, ceny a služby jsou ilustrační.</p><a href="tel:+420519352200">+420 519 352 200</a><span class="muted">Vinařská 128, 691 42 Valtice</span></div><div><h3>Vinotéka</h3><a href="#catalog/all">Všechna vína</a><a href="#catalog/white">Bílá vína</a><a href="#catalog/red">Červená vína</a><a href="#catalog/rose">Růžová vína</a><a href="#page/ocenena-vina">Oceněná vína</a><a href="#page/blog">Blog</a></div><div><h3>Vinařství</h3><a href="#page/nase-vinice">Naše vinice</a><a href="#page/degustace">Degustace ve sklepě</a><a href="#page/ubytovani">Ubytování</a><a href="#page/kontakty">Kontakty</a></div><div><h3>Nákup</h3><a href="#page/doprava">Doprava a platba</a><a href="#page/zavozove-trasy">Závozové trasy</a><a href="#page/faq">Časté otázky</a><a href="#page/obchodnipodminky">Obchodní podmínky</a><a href="#page/vraceni-a-reklamace">Reklamace</a></div></div>
+ <a class="footer-wordmark fw-photo" href="#home" aria-label="Brave Winery — zpět nahoru" data-cursor="Nahoru"><span class="fw-mask" aria-hidden="true"><span class="fw-img"></span></span></a>
+ <div class="footer-bottom"><span>© 2026 Brave Winery · Design demo</span><div><a href="#page/odstoupeni-od-smlouvy">Odstoupení od smlouvy</a><a href="#page/zpracovani-osobnich-udaju">Soukromí</a><button data-action="cookies">Cookies</button></div><span class="age-badge"><b>18+</b> Prodej alkoholu jen dospělým</span></div>
+</footer>
+<button class="chat-launch" data-action="chat" aria-label="Zeptat se vinaře" data-icon="chat"></button>
+<div id="overlay" class="overlay" hidden></div><aside id="drawer" class="drawer" hidden aria-modal="true" role="dialog" aria-labelledby="drawer-title" data-lenis-prevent></aside>
+<dialog id="modal" aria-labelledby="modal-title" data-lenis-prevent></dialog><div id="toast" class="toast" role="status"></div><div id="cursor" aria-hidden="true"></div>
+<div id="cookie-banner" class="cookie-banner" hidden><div><strong>Jen to nejnutnější.</strong><p>Používáme pouze místní úložiště pro košík, ověření věku a vaše nastavení. Volitelné měření je v maketě vypnuté.</p></div><button data-action="cookie-settings">Nastavení</button><button data-action="cookie-necessary">Pouze nezbytné</button><button class="btn dark" data-action="cookie-all">Přijmout vše</button></div>
+</body></html>

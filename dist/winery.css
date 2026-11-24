@@ -1,0 +1,524 @@
+/* Brave Winery – vrstva vzhledu nad sdíleným jádrem Brave Shop (styles.css). */
+:root{--bg:#FBF8F3;--ink:#1E1A17;--muted:#6F665D;--line:#E7E1D6;--tile:#EEE9E0;--accent:#5A1F2B;--accent-ink:#fff;--gold:#9C7A4A;--paper:#F4EFE6;
+ --serif:'ogg',Georgia,'Times New Roman',serif;--r:4px}
+body[data-style=winery]{background:var(--bg)}
+::selection{background:var(--accent);color:#fff}
+
+/* Typografie: serif pro nadpisy, Geist pro rozhraní */
+h1,h2,.spotlight-title,.quiz-q,.cl-name,.tl-year,.exp-card h3,.review blockquote,.story-copy blockquote p,.intro h2,.page-top h1,.footer-top h2,.age-box h2,.big-price,.pd-info h1,.article-body h2{font-family:var(--serif);font-weight:500;letter-spacing:-.015em}
+h1 em,h2 em,.spotlight-title em{font-style:italic;font-weight:400}
+h2{line-height:1.02}
+.page-top h1{font-size:clamp(48px,7vw,120px);line-height:.95}
+.eyebrow{letter-spacing:.14em;font-size:11.5px}
+.sale-link,header .sale-link{color:var(--accent)}
+.btn.dark{background:var(--ink);border-color:var(--ink)}
+.btn.dark:hover{background:var(--accent);border-color:var(--accent)}
+.badge.sale{background:var(--accent);color:#fff}
+.badge.medal{background:transparent;color:var(--gold);font-weight:600;display:inline-flex;align-items:center;gap:7px;padding-left:4px}.badge.medal .medal-ic{width:22px;height:22px}
+.announcement{background:#2A2320}
+footer{background:var(--paper)}
+.footer-wordmark img{width:100%;height:auto;opacity:.92}
+.age-badge b{display:inline-grid;place-items:center;width:30px;height:30px;border:1px solid currentColor;border-radius:50%;font-size:11px;margin-right:8px}
+
+/* ---------- Úvod: paralaxa vinařství ---------- */
+.hero.hero-parallax{height:calc(100svh - var(--ann));min-height:620px;max-height:none;background:#2b2a24;isolation:isolate}
+.hp-layer{position:absolute;inset:-28px;pointer-events:none;will-change:transform}
+.hp-layer img{width:100%;height:100%;object-fit:cover;display:block}
+.hp-bg{z-index:0;transform:translate3d(calc(var(--mx,0) * -14px),calc(var(--bg-y,0px) + var(--my,0) * -8px),0) scale(var(--bg-s,1.06));transform-origin:50% 60%}
+.hp-bg img,.hp-fg img{object-position:50% 32%}
+.hp-bg:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,16,12,.38) 0%,rgba(20,16,12,0) 34%),linear-gradient(0deg,rgba(20,16,12,.42) 0%,rgba(20,16,12,0) 46%)}
+.hp-fg{z-index:3;inset:-70px -90px -60px;transform:translate3d(calc(var(--mx,0) * -42px),calc(var(--fg-y,0px) + var(--my,0) * -18px),0) scale(var(--fg-s,1));transform-origin:50% 100%}
+.hp-fg:after{content:'';position:absolute;inset:auto 0 0;height:42%;background:linear-gradient(0deg,rgba(16,13,10,.55),rgba(16,13,10,0))}
+.hp-copy{position:absolute;z-index:4;left:0;right:0;top:calc(var(--hh) + clamp(28px,7vh,90px));text-align:center;padding:0 var(--pad);color:#fff;transform:translate3d(calc(var(--mx,0) * -24px),var(--copy-y,0px),0);opacity:var(--copy-o,1)}
+.hp-copy h1{font-size:clamp(44px,min(5.8vw,10.5vh),112px);line-height:.95;letter-spacing:-.02em;margin:0 auto 22px;max-width:none;font-weight:500;text-shadow:0 2px 30px rgba(0,0,0,.32),0 1px 3px rgba(0,0,0,.18)}
+.hp-copy .eyebrow{color:#fff;opacity:.92}
+.hp-cta{position:absolute;z-index:4;left:0;right:0;bottom:clamp(80px,13vh,130px);text-align:center;padding:0 var(--pad);color:#fff;opacity:var(--cta-o,1)}
+.hp-cta .hero-text{margin:0 auto 26px;max-width:460px;font-size:clamp(15px,1.1vw,18px);text-shadow:0 1px 20px rgba(0,0,0,.35)}
+.hp-cta .hero-links{justify-content:center}
+.hp-bottom{position:absolute;z-index:4;left:var(--pad);right:var(--pad);bottom:22px;display:flex;justify-content:space-between;align-items:center;color:#fff;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.hp-scroll{display:flex;align-items:center;gap:12px}
+.hp-scroll i{width:1px;height:38px;background:rgba(255,255,255,.4);position:relative;overflow:hidden}
+.hp-scroll i:after{content:'';position:absolute;left:0;top:-40%;width:1px;height:40%;background:#fff;animation:hpline 2.2s var(--ease-io) infinite}
+@keyframes hpline{to{top:100%}}
+/* nástup: kamera „odjíždí“ z listů, budova se doostří */
+.hero-parallax .hp-fg img{transform:scale(1.35);filter:blur(6px);opacity:0;transition:transform 2.6s var(--ease),filter 2.2s var(--ease),opacity 1.4s var(--ease)}
+.hero-parallax .hp-bg img{transform:scale(1.1);filter:saturate(.8) brightness(.9);transition:transform 3s var(--ease),filter 2.4s var(--ease)}
+.hero-parallax.is-ready .hp-fg img{transform:none;filter:none;opacity:1}
+.hero-parallax.is-ready .hp-bg img{transform:none;filter:none}
+.hero-parallax .hp-copy .eyebrow,.hero-parallax .hero-text,.hero-parallax .hero-links,.hero-parallax .hp-bottom{opacity:0;transform:translateY(16px);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.hero-parallax.is-ready .hp-copy .eyebrow{opacity:.92;transform:none;transition-delay:.5s}
+.hero-parallax.is-ready .hero-text{opacity:.92;transform:none;transition-delay:1s}
+.hero-parallax.is-ready .hero-links{opacity:1;transform:none;transition-delay:1.15s}
+.hero-parallax.is-ready .hp-bottom{opacity:1;transform:none;transition-delay:1.4s}
+.hero-parallax h1[data-split] .w>span{transition-delay:calc(.55s + var(--i,0) * 90ms);transition-duration:1.5s}
+@media (prefers-reduced-motion:reduce){.hp-layer,.hp-copy,.hp-cta{transform:none!important}.hero-parallax .hp-fg img,.hero-parallax .hp-bg img,.hero-parallax .hp-copy *,.hero-parallax .hp-cta *,.hero-parallax .hp-bottom{transition:none!important;transform:none!important;filter:none!important;opacity:1!important}}
+
+/* ---------- Intro ---------- */
+.intro{padding:clamp(90px,13vw,220px) var(--pad) clamp(60px,8vw,130px);max-width:1500px;margin:0 auto}
+.intro h2{font-size:clamp(34px,4.4vw,78px);line-height:1.06;max-width:21ch;margin-bottom:clamp(50px,7vw,110px)}
+.intro-facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.intro-facts div{padding:28px 24px 0 0;display:grid;gap:8px}
+.intro-facts div+div{padding-left:24px;border-left:1px solid var(--line)}
+.intro-facts strong{font-family:var(--serif);font-size:clamp(46px,5.5vw,96px);font-weight:500;line-height:1;letter-spacing:-.02em}
+.intro-facts span{color:var(--muted)}
+
+/* ---------- Karty vín: velké lahve ---------- */
+/* lahev bez rámečku: výřez + jemná ilustrace v pozadí */
+.wine-card .product-image{aspect-ratio:3/4;background:none;border-radius:0;overflow:visible}
+.wine-card .product-image>a{display:block;height:100%}
+.wine-stage,.pd-stage{position:relative;display:block;width:100%;height:100%}
+.wine-illus{position:absolute;left:50%;top:48%;width:96%;height:auto;max-height:100%;object-fit:contain;transform:translate(-50%,-50%) scale(1);opacity:.42;transition:opacity 1s var(--ease),transform 1.6s var(--ease);pointer-events:none}
+.wine-bottle{position:absolute;left:50%;bottom:7%;height:84%;width:auto;max-width:none;object-fit:contain;transform:translateX(-50%);transition:transform 1.2s var(--ease);z-index:1}
+.wine-shadow{position:absolute;left:50%;bottom:5.2%;width:30%;height:3.2%;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(40,30,20,.32),rgba(40,30,20,0));transition:transform 1.2s var(--ease),opacity 1.2s var(--ease)}
+.wine-card:hover .wine-illus{opacity:.72;transform:translate(-50%,-50%) scale(1.05)}
+.wine-card:hover .wine-bottle{transform:translateX(-50%) translateY(-10px)}
+.wine-card:hover .wine-shadow{transform:translateX(-50%) scale(.82);opacity:.7}
+img[src*="/b-"]{object-fit:contain!important}
+.wine-card .product-meta small{color:var(--muted);font-size:12px;letter-spacing:.02em}
+.wine-card h3{font-family:var(--serif);font-size:clamp(24px,1.9vw,32px);font-weight:500;letter-spacing:-.01em;margin:6px 0 6px;line-height:1.05}
+.wine-card .notes{color:var(--muted);font-size:13.5px;margin:0 0 10px}
+.wine-card .price{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:16px}
+.wine-card .price em,.quick-price em,.spotlight-price em{font-style:normal;color:var(--muted);font-size:12.5px}
+.rating-line{display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--muted);margin-bottom:10px}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}.stars i{font-style:normal;color:#d9d2c4}
+.rail .product-card{flex:0 0 calc((100% - 2.4 * var(--gap)) / 3.4)}
+.lines .tabs button small{color:var(--muted);font-size:11px;margin-left:4px}
+@media (max-width:760px){.rail .product-card{flex:0 0 74%}}
+
+/* ---------- Víno měsíce ---------- */
+.spotlight{display:grid;grid-template-columns:1.1fr 1fr;min-height:100svh;background:var(--paper)}
+.spotlight-media{position:relative;overflow:hidden;background:var(--tile);display:block}
+.spotlight-media .parallax-wrap{position:absolute;inset:-6% 0}.spotlight-media img{width:100%;height:100%;object-fit:cover;display:block}
+.spotlight-copy{padding:clamp(50px,8vw,140px) clamp(24px,6vw,120px);display:flex;flex-direction:column;justify-content:center;gap:4px}
+.spotlight-title{font-size:clamp(56px,7vw,128px);line-height:.92;margin-bottom:26px}
+.spotlight-text{font-size:clamp(16px,1.2vw,19px);max-width:46ch;color:#433b34}
+.spotlight-facts{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 44px;margin:26px 0 34px;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spotlight-facts dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.spotlight-facts dd{margin:4px 0 0;font-size:16px}
+.spotlight-buy{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-bottom:22px}
+.spotlight-price{font-family:var(--serif);font-size:40px}
+
+/* ---------- Terroir, příběh ---------- */
+.terroir .feature-copy h2{font-size:clamp(46px,6vw,110px);line-height:.95}
+.terroir:after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(20,16,12,.5),rgba(20,16,12,0) 60%);pointer-events:none}
+.story{padding:clamp(80px,10vw,180px) var(--pad)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,120px);align-items:start}
+.story-main{margin:0;aspect-ratio:4/5;overflow:hidden;border-radius:var(--r);position:sticky;top:calc(var(--hh) + 30px)}
+.story-main img,.story-pair img{width:100%;height:100%;object-fit:cover}
+.story-copy{padding-top:clamp(0px,6vw,100px)}
+.story-copy blockquote{margin:0 0 40px}
+.story-copy blockquote p{font-size:clamp(38px,4.2vw,74px);line-height:1.02;font-style:italic;font-weight:400}
+.story-copy footer{background:none;font-size:13px;color:var(--muted);margin-top:18px;padding:0}
+.story-text{font-size:17px;max-width:48ch;color:#433b34;margin-bottom:40px}
+.story-pair{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-bottom:34px}
+.story-pair figure{margin:0;aspect-ratio:3/4;overflow:hidden;border-radius:var(--r)}
+.story-pair figure:nth-child(2){transform:translateY(clamp(20px,4vw,70px))}
+
+/* ---------- Časová osa ---------- */
+.timeline{padding-top:clamp(70px,8vw,140px)}
+.tl{list-style:none;margin:0;padding:0;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--line)}
+.tl li{flex:0 0 clamp(260px,30vw,460px);padding:30px 40px 10px 0;position:relative}
+.tl li:before{content:'';position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+.tl-year{display:block;font-family:var(--serif);font-size:clamp(70px,8vw,150px);line-height:.9;color:var(--accent);margin-bottom:16px}
+.tl h3{font-size:20px;margin-bottom:8px}
+.tl p{color:var(--muted);max-width:32ch}
+
+/* ---------- Kategorie s obrázkem u kurzoru ---------- */
+.cat-list-section{position:relative}
+.cat-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.cat-list li{border-bottom:1px solid var(--line)}
+.cat-list a{display:grid;grid-template-columns:60px 1.3fr 1fr auto 40px;align-items:center;gap:24px;padding:clamp(20px,2.4vw,34px) 0;transition:opacity .5s var(--ease),padding .6s var(--ease)}
+.cl-no{font-size:12px;color:var(--muted)}
+.cl-name{font-size:clamp(40px,5.2vw,96px);line-height:1;letter-spacing:-.015em;transition:transform .7s var(--ease)}
+.cl-notes{color:var(--muted)}
+.cl-meta{font-size:13px;white-space:nowrap}
+.cl-arrow{font-size:22px;transition:transform .5s var(--ease)}
+.cat-list.hovering a:not(.active){opacity:.28}
+.cat-list a.active .cl-name{transform:translateX(18px);font-style:italic}
+.cat-list a.active .cl-arrow{transform:rotate(45deg)}
+.cat-float{position:absolute;left:0;top:0;width:clamp(220px,20vw,340px);aspect-ratio:3/4;pointer-events:none;z-index:5;opacity:0;scale:.85;transition:opacity .45s var(--ease),scale .6s var(--ease);border-radius:var(--r);overflow:hidden}
+.cat-float.on{opacity:1;scale:1}
+.cat-float img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .35s var(--ease),transform .8s var(--ease)}.cat-float img.show{opacity:1;transform:none}
+@media (hover:none),(max-width:900px){.cat-float{display:none}.cat-list a{grid-template-columns:34px 1fr auto;gap:14px}.cl-notes,.cl-meta{display:none}}
+
+/* ---------- Kvíz ---------- */
+.quiz{display:grid;grid-template-columns:1fr 1fr;min-height:max(92svh,640px)!important;background:var(--paper)}
+.quiz-media{position:relative;overflow:hidden;color:#fff;margin:0}
+.quiz-media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.quiz-media:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,12,.65),rgba(20,16,12,.05) 70%)}
+.quiz-media-copy{position:absolute;z-index:1;left:clamp(24px,4vw,70px);right:clamp(24px,4vw,70px);bottom:clamp(30px,5vw,80px)}
+.quiz-media-copy .eyebrow{color:#fff}
+.quiz-media-copy h2{font-size:clamp(46px,5.4vw,100px);line-height:.95;margin-bottom:18px}
+.quiz-media-copy p{max-width:40ch;opacity:.9}
+.quiz-box{padding:clamp(40px,6vw,110px) clamp(24px,5vw,100px);display:flex;flex-direction:column;justify-content:center;gap:20px}
+.quiz-progress{list-style:none;padding:0;margin:0 0 20px;display:flex;gap:24px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.quiz-progress li{display:flex;align-items:center;gap:8px}
+.quiz-progress span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1px solid var(--line);font-size:11px}
+.quiz-progress li.on{color:var(--ink)}.quiz-progress li.on span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.quiz-progress li.done span{background:var(--accent);border-color:var(--accent);color:#fff}
+.quiz-q{font-size:clamp(36px,3.6vw,62px);line-height:1.02;margin:0 0 10px}
+.quiz-step{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:0}
+.quiz-opts{display:grid;gap:10px}
+.quiz-opt{display:flex;justify-content:space-between;align-items:center;text-align:left;padding:22px 26px;border:1px solid var(--line);border-radius:var(--r);background:var(--bg);font-size:17px;transition:border-color .3s,background .3s,transform .5s var(--ease)}
+.quiz-opt:hover{border-color:var(--ink);transform:translateX(6px)}
+.quiz-opt span{transition:transform .4s var(--ease)}.quiz-opt:hover span{transform:translateX(6px)}
+.quiz-result{display:grid;gap:16px}
+.qr{display:grid;grid-template-columns:120px 1fr;gap:20px;align-items:center;background:var(--bg);padding:14px;border-radius:var(--r)}
+.qr img{width:120px;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r);background:var(--tile)}
+.qr small{color:var(--muted)}.qr h4{font-family:var(--serif);font-size:28px;font-weight:500;margin:4px 0}
+.qr p{color:var(--muted);font-size:13.5px;margin:0 0 10px}
+.qr-buy{display:flex;align-items:center;gap:18px}.qr-buy .btn{min-height:42px;margin:0}
+.quiz-box .text-link{align-self:flex-start}
+
+/* ---------- Zážitky ---------- */
+.experiences{padding:clamp(80px,10vw,170px) var(--pad)}
+.exp-head{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(30px,4vw,60px)}
+.exp-head .section-head{margin:0}
+.exp-head h2{font-size:clamp(46px,5.6vw,104px);line-height:.95}
+.exp-lead{color:var(--muted);max-width:40ch;font-size:16px}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.exp-card{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;color:#fff;border-radius:var(--r)}
+.exp-card .parallax-wrap{position:absolute;inset:-8% 0}
+.exp-card img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.exp-card:hover img{transform:scale(1.04)}
+.exp-card:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,16,12,.7),rgba(20,16,12,0) 55%)}
+.exp-copy{position:absolute;z-index:1;left:clamp(20px,3vw,46px);right:clamp(20px,3vw,46px);bottom:clamp(22px,3vw,46px);display:grid;gap:6px}
+.exp-copy .eyebrow{color:#fff;margin:0}
+.exp-copy h3{font-size:clamp(34px,3.4vw,60px);margin:0;line-height:1}
+.exp-copy p{margin:0;opacity:.88}
+.exp-price{font-size:18px;margin:8px 0}
+
+/* ---------- Ocenění, recenze ---------- */
+.awards{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:26px 0}
+.awards .marquee-track>div{display:flex;gap:64px;padding-right:64px}
+.award{display:flex;align-items:center;gap:14px;white-space:nowrap}
+.award strong{display:block;font-size:14px}.award small{color:var(--muted);font-size:12.5px}
+.medal-ic{width:40px;height:40px;flex:none}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap)}
+.review{margin:0;padding:clamp(26px,3vw,46px);background:var(--paper);border-radius:var(--r);display:flex;flex-direction:column;gap:18px}
+.review blockquote{margin:0;font-size:clamp(24px,2vw,32px);line-height:1.15}
+.review figcaption{margin-top:auto;font-size:13px;color:var(--muted)}
+
+/* ---------- Návštěva, Instagram ---------- */
+.visit{display:grid;grid-template-columns:1.25fr 1fr;min-height:90svh}
+.visit-media{margin:0;overflow:hidden}.visit-media img{width:100%;height:100%;object-fit:cover}
+.visit-copy{padding:clamp(50px,7vw,130px) clamp(24px,5vw,100px);display:flex;flex-direction:column;justify-content:center}
+.visit-copy h2{font-size:clamp(50px,5.6vw,104px);line-height:.95}
+.visit-copy>p{color:var(--muted);max-width:40ch}
+.visit-facts{margin:26px 0 30px;display:grid;gap:18px}
+.visit-facts div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding-top:16px;border-top:1px solid var(--line)}
+.visit-facts dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.visit-facts dd{margin:0}
+.visit-copy .btn{align-self:flex-start}
+.insta{padding:clamp(60px,7vw,120px) 0 0}
+.insta-head{display:flex;justify-content:space-between;align-items:center;padding:0 var(--pad) 22px}
+.insta-head .eyebrow{margin:0}
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr)}
+.insta-grid a{aspect-ratio:1;overflow:hidden;display:block}
+.insta-grid img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease),filter .6s}
+.insta-grid a:hover img{transform:scale(1.06)}
+.benefits{background:var(--bg)}
+
+/* ---------- Detail vína ---------- */
+.pd-layout{display:grid;grid-template-columns:1.35fr 1fr;gap:clamp(24px,4vw,80px);padding:0 var(--pad) 0 0}
+.pd-gallery{display:grid;gap:4px;position:relative}
+.pd-shot{display:block;padding:0;border:0;background:var(--tile);overflow:hidden;aspect-ratio:4/5;cursor:zoom-in}
+.pd-shot.pd-main{background:none;overflow:visible}.pd-main .wine-illus{width:92%;opacity:.5}.pd-main .wine-bottle{height:82%;bottom:8%}.pd-main:hover .wine-illus{opacity:.7}.pd-shot.pd-main:hover img.wine-bottle{transform:translateX(-50%) translateY(-8px)}.pd-shot:hover img.wine-illus{transform:translate(-50%,-50%) scale(1.04)}
+.pd-shot img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.pd-shot:hover img{transform:scale(1.03)}
+.pd-dots{display:none}
+.pd-info{padding-top:clamp(20px,3vw,50px)}
+.pd-sticky{position:sticky;top:calc(var(--hh) + 24px);padding-bottom:60px}
+.pd-info h1{font-size:clamp(52px,5.4vw,96px);line-height:.92;margin:8px 0 6px}
+.pd-predicate{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--muted);margin-bottom:14px}
+.pd-medal{display:flex;align-items:center;gap:12px;font-size:14px;margin:12px 0 18px}
+.big-price{font-size:44px;display:flex;align-items:baseline;gap:14px}
+.big-price .save{font-family:var(--font);font-size:13px;background:var(--accent);color:#fff;padding:4px 10px;border-radius:99px}
+.chips{list-style:none;padding:0;margin:18px 0;display:flex;gap:8px;flex-wrap:wrap}
+.chips li{border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px}
+.pd-lead{font-size:16px;color:#433b34;max-width:48ch}
+.profile{display:grid;gap:12px;margin:24px 0;padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pf{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:16px;font-size:13px}
+.pf i{height:3px;background:var(--line);position:relative;border-radius:3px;overflow:hidden}
+.pf i:after{content:'';position:absolute;inset:0;background:var(--accent);transform-origin:left;transform:scaleX(var(--v));transition:transform 1.4s var(--ease)}
+.free-hint{font-size:13px;color:var(--accent);margin:10px 0 18px;font-weight:500}
+.quick-price{font-size:22px;margin:18px 0 6px}
+.preset-quick-image{background:var(--tile);aspect-ratio:3/4;max-height:52vh;overflow:hidden;border-radius:var(--r)}
+.preset-quick-image img{width:100%;height:100%;object-fit:contain}
+.bottle-pick{border:0;padding:0;margin:8px 0;display:flex;gap:8px;flex-wrap:wrap}
+.bottle-pick legend{font-size:13px;margin-bottom:8px}
+.bottle-pick label{position:relative}
+.bottle-pick input{position:absolute;opacity:0}
+.bottle-pick span{display:inline-block;padding:10px 16px;border:1px solid var(--line);border-radius:99px;font-size:14px;cursor:pointer}
+.bottle-pick input:checked+span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.bottle-pick input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.pd-mobile-buy{display:none}
+@media (max-width:900px){
+ .pd-layout{grid-template-columns:1fr;padding:0}
+ .pd-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:0}
+ .pd-shot{flex:0 0 100%;scroll-snap-align:start}
+ .pd-dots{display:flex;gap:6px;position:absolute;bottom:14px;left:50%;translate:-50% 0}
+ .pd-dots i{width:6px;height:6px;border-radius:50%;background:rgba(30,26,23,.25)}.pd-dots i.on{background:var(--ink)}
+ .pd-info{padding:0 var(--pad)}
+ .pd-sticky{position:static}
+ .pd-mobile-buy{display:flex;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:rgba(251,248,243,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);justify-content:space-between;align-items:center;gap:14px}
+ .pd-mobile-buy small{display:block;color:var(--muted);font-size:12px}
+ .pd-mobile-buy .btn{margin:0;min-height:46px}
+}
+
+/* ---------- Rezervace, ocenění, věk ---------- */
+.booking-opts{border:0;padding:0;margin:0 0 8px;display:grid;gap:8px}
+.booking-opts legend{font-size:13px;margin-bottom:8px}
+.booking .radio-option{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r);cursor:pointer;background:var(--bg)}
+.booking .radio-option:has(input:checked){border-color:var(--ink)}
+.booking .radio-option small{display:block;color:var(--muted)}
+.booking-sum{min-height:24px;font-size:15px}
+.booking-sum .ok{color:#3c6b34}
+.award-list{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:0}
+.award-list li{display:flex;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.award-list strong{display:block}
+.age-gate{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:20px;background:rgba(30,26,23,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);animation:agefade .6s var(--ease)}
+.age-box{background:var(--bg);max-width:480px;width:100%;padding:clamp(30px,5vw,56px);text-align:center;border-radius:var(--r);box-shadow:0 30px 80px rgba(0,0,0,.18)}
+.age-box img{width:110px;height:auto;margin:0 auto 26px;display:block}
+.age-box h2{font-size:clamp(34px,4vw,50px);line-height:1;margin-bottom:14px}
+.age-box p{color:var(--muted)}
+.age-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.age-actions .btn{margin:0}
+.age-note{color:var(--accent)!important;margin-top:18px}
+@keyframes agefade{from{opacity:0}}
+html.is-locked{overflow:hidden}
+
+/* ---------- Mobil ---------- */
+@media (max-width:900px){
+ .spotlight,.quiz,.visit,.story-grid,.exp-head,.exp-grid{grid-template-columns:1fr}
+ .spotlight-media{aspect-ratio:4/5}
+ .story-main{position:relative;top:0}
+ .quiz-media{aspect-ratio:4/5}
+ .visit-media{aspect-ratio:4/3}
+ .review-grid{grid-template-columns:1fr}
+ .insta-grid{grid-template-columns:repeat(3,1fr)}
+ .intro-facts{grid-template-columns:1fr}
+ .intro-facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+ .intro-facts div{padding:22px 0}
+ .spotlight-facts{grid-template-columns:repeat(3,1fr);gap:12px 18px}
+ .hp-copy{top:calc(var(--hh) + 70px)}
+ .hp-bottom span{display:none}
+ .hp-bottom{justify-content:center}
+ .exp-card{aspect-ratio:4/5}
+}
+@media (max-width:520px){.hp-copy h1{font-size:clamp(40px,12vw,58px)}.hp-copy .hero-links{flex-direction:column;gap:16px}}
+
+.section-head h2{max-width:18ch}
+.lines .section-head h2,.cat-list-section .section-head h2,.reviews .section-head h2{max-width:none}
+/* přebití obecných pravidel pro obrázky v kartách a galerii */
+.wine-stage img.wine-bottle,.pd-stage img.wine-bottle{width:auto;height:84%;max-width:none;object-fit:contain;transform:translateX(-50%)}
+.pd-stage img.wine-bottle{height:82%;bottom:8%}
+.wine-stage img.wine-illus,.pd-stage img.wine-illus{height:auto;object-fit:contain;transform:translate(-50%,-50%)}
+.wine-card:hover .wine-stage img.wine-bottle,.pd-shot.pd-main:hover .pd-stage img.wine-bottle{transform:translateX(-50%) translateY(-10px)}
+.wine-card:hover .wine-stage img.wine-illus,.pd-shot.pd-main:hover .pd-stage img.wine-illus{transform:translate(-50%,-50%) scale(1.05)}
+.wine-stage img.wine-bottle,.pd-stage img.wine-bottle{top:auto;right:auto;left:50%;bottom:7%}
+.pd-stage img.wine-bottle{bottom:8%}
+.wine-stage img.wine-illus,.pd-stage img.wine-illus{right:auto;bottom:auto;left:50%;top:48%}
+.wine-card .product-image{overflow:hidden}
+.wine-card .badge:not(.sale){background:transparent;padding-left:2px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;font-size:11px}.wine-card .badge.medal{color:var(--gold);text-transform:none;font-size:12px;letter-spacing:0}
+
+/* košík u ceny místo překryvu přes obrázek */
+.wine-card .price{position:relative;padding-right:56px;min-height:44px}
+.wine-card .quick-add.wc-add{position:absolute;right:0;top:50%;left:auto;bottom:auto;transform:translateY(-50%);width:44px;height:44px;padding:0;border-radius:50%;justify-content:center;background:transparent;border:1px solid var(--line);color:var(--ink);transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
+.wine-card .quick-add.wc-add svg{width:18px;height:18px}
+.wine-card .quick-add.wc-add:hover,.wine-card .quick-add.wc-add:focus-visible{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* mega menu: náhled vína */
+.mega-image .mi-illus{position:absolute;left:50%;top:50%;width:auto;height:118%;transform:translate(-50%,-50%);opacity:0;transition:opacity .5s var(--ease);pointer-events:none;object-fit:contain}
+.mega-image.is-bottle{background:var(--paper)}
+.mega-image.is-bottle:after{opacity:0}
+.mega-image.is-bottle span{opacity:0}
+.mega-image.is-bottle .mi-illus{opacity:.5}
+.mega-image.is-bottle img:not(.mi-illus){position:relative;z-index:1;object-fit:contain;width:100%;height:100%;padding:7% 0 6%;filter:drop-shadow(0 16px 14px rgba(40,30,20,.16))}
+.mega-image.is-bottle:hover img:not(.mi-illus){transform:translateY(-6px)}
+
+/* ============ Detail vína (UX podle sestalaioles: barevný pás, velká lahev, citát + akordeon) ============ */
+.wine-pd{--tone:#5A1F2B;--tone-2:#4E1A25;--on:#F7F1E6;--on-2:rgba(247,241,230,.72);--hair:rgba(247,241,230,.26);color:var(--on)}
+.wine-pd[data-tone=white]{--tone:#59603F;--tone-2:#4E5537}
+.wine-pd[data-tone=rose]{--tone:#94585B;--tone-2:#844C50}
+.wine-pd[data-tone=sparkling]{--tone:#2F3B35;--tone-2:#27322D}
+.wine-pd .breadcrumb,.wine-pd .breadcrumb a{color:var(--on-2)}.wine-pd .breadcrumb a:hover{color:var(--on)}
+.wine-pd .eyebrow{color:var(--on-2)}
+.wine-pd .muted{color:var(--on-2)}
+.pd-hero{position:relative;overflow:hidden;background:var(--tone);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,72px);min-height:calc(100svh - var(--hh,80px));padding:clamp(30px,4vw,60px) var(--pad) 0}
+.pd-hero-copy{position:relative;z-index:2;align-self:center;max-width:540px;padding-bottom:clamp(40px,6vw,90px)}
+.pd-hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(50px,5.4vw,98px);line-height:.95;letter-spacing:-.02em;margin:10px 0 22px;color:var(--on)}
+.pd-hero h1 em{font-style:italic;font-weight:400;color:var(--on-2)}
+.pd-hero .pd-lead{font-size:clamp(16px,1.2vw,19px);line-height:1.55;color:var(--on);opacity:.9;margin:0 0 26px;max-width:46ch}
+.pd-hero .pd-medal{display:flex;align-items:center;gap:12px;font-size:14px;margin:0 0 26px;color:var(--on)}
+.pd-hero .pd-medal .medal-ic{width:38px;height:38px}
+.pd-opts{margin:0;display:grid;gap:4px}
+.pd-opts>div{display:grid;grid-template-columns:96px 1fr;align-items:center;min-height:48px}
+.pd-opts dt{font-size:14px;color:var(--on-2)}
+.pd-opts dd{margin:0;display:flex;gap:8px;flex-wrap:wrap}
+.pd-opts .opt{display:inline-grid;place-items:center;min-width:56px;height:34px;padding:0 12px;border:1px solid var(--hair);border-radius:8px;font-size:13px;color:var(--on-2)}
+.pd-opts .opt.on{border-color:var(--on);color:var(--on);box-shadow:inset 0 0 0 .5px var(--on)}
+.pd-opts .opt[aria-disabled]{opacity:.5;text-decoration:line-through;text-decoration-thickness:1px}
+.wine-pd .quantity{border-color:var(--hair);min-height:38px;border-radius:8px;color:var(--on)}
+.wine-pd .quantity button{color:var(--on);height:34px;width:32px}
+.wine-pd .quantity input{color:var(--on);font-size:14px}
+.pd-price{border-top:1px solid var(--hair);margin-top:22px;padding-top:22px}
+.wine-pd .big-price{font-family:var(--serif);font-size:clamp(34px,2.6vw,44px);line-height:1;color:var(--on);display:flex;align-items:baseline;gap:12px}
+.wine-pd .big-price .old{font-size:.55em;color:var(--on-2);text-decoration:line-through}
+.wine-pd .big-price .save{font-family:var(--sans,inherit);font-size:13px;padding:4px 9px;border-radius:99px;background:var(--on);color:var(--tone)}
+.wine-pd .tax{font-size:13px;color:var(--on-2);margin-top:8px}
+.wine-pd .buy-line{display:flex;align-items:center;gap:10px;margin:26px 0 14px}
+.wine-pd .btn.pd-add{background:transparent;color:var(--on);border:1px solid var(--on);border-radius:99px;min-height:54px;padding:0 26px;display:inline-flex;align-items:center;gap:14px;transition:background .4s var(--ease),color .4s var(--ease)}
+.wine-pd .btn.pd-add:hover{background:var(--on);color:var(--tone)}
+.pd-ic{width:54px;height:54px;border-radius:50%;border:1px solid var(--hair);display:grid;place-items:center;color:var(--on);transition:background .35s var(--ease),color .35s var(--ease),border-color .35s}
+.pd-ic svg{width:18px;height:18px}
+.pd-ic:hover,.pd-ic.selected{background:var(--on);color:var(--tone);border-color:var(--on)}
+.pd-ic.selected svg{fill:currentColor}.pd-ic[data-action=compare].selected svg{fill:none}
+.wine-pd .free-hint{font-size:13px;color:var(--on-2);margin:0 0 18px}
+.wine-pd .rating-line{color:var(--on-2);font-size:13px}.wine-pd .rating-line svg{color:#E3C690}
+.pd-hero-stage{position:relative;align-self:stretch;min-height:min(82svh,860px);padding:0;border:0;background:none;cursor:zoom-in}
+.pd-hero-stage .pd-illus{position:absolute;left:50%;top:50%;width:min(110%,980px);height:auto;transform:translate(-50%,-50%);filter:brightness(0);opacity:.16;mix-blend-mode:multiply;pointer-events:none;transition:transform 1.6s var(--ease)}
+.pd-hero-stage .pd-bottle{position:absolute;left:50%;bottom:clamp(36px,6vh,70px);height:84%;width:auto;max-width:none;transform:translateX(-50%);filter:drop-shadow(0 34px 34px rgba(0,0,0,.32)) drop-shadow(0 6px 8px rgba(0,0,0,.18));transition:transform 1.4s var(--ease)}
+.pd-hero-stage:hover .pd-bottle{transform:translateX(-50%) translateY(-10px)}
+.pd-hero-stage:hover .pd-illus{transform:translate(-50%,-50%) scale(1.03)}
+.pd-hero-stage .pd-bottle{animation:pdIn 1.6s var(--ease) both .15s}
+.pd-hero-stage .pd-illus{animation:pdFade 2s var(--ease) both}
+@keyframes pdIn{from{opacity:0;transform:translateX(-50%) translateY(40px)}to{opacity:1;transform:translateX(-50%)}}
+@keyframes pdFade{from{opacity:0}to{opacity:.16}}
+/* příběh: citát + akordeon */
+.pd-story{background:var(--tone);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(30px,6vw,110px);padding:clamp(70px,9vw,150px) var(--pad);border-top:1px solid var(--hair)}
+.pd-quote{margin:0;align-self:center}
+.pd-quote blockquote{margin:0 0 26px;font-family:var(--serif);font-style:italic;font-size:clamp(30px,3vw,52px);line-height:1.08;letter-spacing:-.01em;color:var(--on)}
+.pd-quote figcaption{font-size:14px;line-height:1.5}.pd-quote figcaption b{display:block;font-weight:600}.pd-quote figcaption span{color:var(--on-2)}
+.pd-acc details{border-top:1px solid var(--hair)}
+.pd-acc details:last-of-type{border-bottom:1px solid var(--hair)}
+.pd-acc summary{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:clamp(17px,1.25vw,20px);cursor:pointer;color:var(--on)}
+.pd-acc summary::-webkit-details-marker{display:none}
+.pd-acc summary i{position:relative;width:14px;height:14px}
+.pd-acc summary i:before,.pd-acc summary i:after{content:'';position:absolute;left:0;right:0;top:50%;height:1.5px;background:currentColor;transition:transform .45s var(--ease)}
+.pd-acc summary i:after{transform:rotate(90deg)}
+.pd-acc details[open] summary i:after{transform:rotate(0)}
+.pd-acc .acc-body{padding:0 0 28px;color:var(--on);opacity:.88;font-size:15px;line-height:1.65;max-width:60ch;animation:accIn .6s var(--ease)}
+@keyframes accIn{from{opacity:0;transform:translateY(-6px)}to{opacity:.88;transform:none}}
+.pd-acc .acc-body h3{font-family:var(--serif);font-weight:500;font-size:24px;margin:0 0 10px}
+.wine-pd .spec-table td{border-color:var(--hair);padding:12px 0}.wine-pd .spec-table td:first-child{color:var(--on-2)}
+.wine-pd .profile{border-color:var(--hair);margin:0 0 18px;padding:0 0 18px;border-top:0}
+.wine-pd .pf i{background:var(--hair)}.wine-pd .pf i:after{background:var(--on)}
+.wine-pd .chips li{border-color:var(--hair);color:var(--on)}
+.wine-pd .acc-body .btn.dark{background:var(--on);color:var(--tone)}
+.pd-links{display:flex;flex-wrap:wrap;gap:8px 26px;padding:24px 0 18px}
+.pd-links button{color:var(--on);font-size:15px;border-bottom:1px solid transparent;transition:border-color .3s}.pd-links button:hover{border-color:var(--on)}
+.pd-acc>small{display:block;font-size:12px;line-height:1.6}
+/* dvě fotky přes celou šířku */
+.pd-duo{display:grid;grid-template-columns:1fr 1fr;background:var(--tone)}
+.pd-duo-shot{position:relative;display:block;padding:0;border:0;overflow:hidden;height:min(86svh,900px);cursor:zoom-in;background:var(--tone-2)}
+.pd-duo-shot .parallax-wrap{position:absolute;inset:-6% 0;display:block}
+.pd-duo-shot img{width:100%;height:100%;object-fit:cover;transition:transform 1.6s var(--ease)}
+.pd-duo-shot:hover img{transform:scale(1.03)}
+.pd-discover{position:relative;display:flex;justify-content:flex-end;align-items:center;min-height:clamp(200px,24vw,340px);padding:0 var(--pad);background:var(--tone);color:var(--on);overflow:hidden}
+.pd-discover span{font-family:var(--serif);font-size:clamp(40px,5vw,88px);letter-spacing:-.02em;line-height:1}
+.pd-discover em{font-style:italic}.pd-discover u{text-decoration-thickness:1px;text-underline-offset:.14em}
+.pd-discover:hover u{text-decoration-thickness:2px}
+.wine-pd+.related{padding-top:clamp(70px,8vw,130px)}
+@media (max-width:900px){
+ .pd-hero{grid-template-columns:1fr;min-height:0;padding-top:16px;gap:0}
+ .pd-hero-stage{order:-1;min-height:0;height:min(64svh,560px)}
+ .pd-hero-stage .pd-bottle{bottom:18px;height:88%}
+ .pd-hero-copy{padding-bottom:56px}
+ .pd-hero h1{font-size:clamp(44px,12vw,64px)}
+ .pd-story{grid-template-columns:1fr;padding:64px var(--pad)}
+ .pd-duo{grid-template-columns:1fr}
+ .pd-duo-shot{height:70svh}
+ .pd-discover{justify-content:flex-start}
+ .wine-pd .buy-line{flex-wrap:wrap}.wine-pd .btn.pd-add{flex:1 1 auto;justify-content:space-between}
+}
+@media (min-width:901px){
+ .pd-hero-stage{position:sticky;top:var(--hh,80px);align-self:start;height:calc(100svh - var(--hh,80px) - var(--ann,0px));min-height:560px}
+ .pd-hero-stage .pd-bottle{height:min(84%,calc(100svh - 230px));bottom:clamp(30px,5vh,60px)}
+}
+@media (min-width:901px){.pd-hero-stage{margin-top:calc(-1 * clamp(30px,4vw,60px))}}
+.wine-pd+.related{padding-top:clamp(40px,5vw,80px)}
+.pd-hero{overflow:clip}
+/* posun textu doleva při scrollu (--dx 0 → −1) */
+.pd-discover{justify-content:flex-start}
+.pd-discover span{white-space:nowrap;font-size:clamp(56px,8vw,150px);transform:translate3d(calc(var(--dx,0) * 45vw + 38vw),0,0);will-change:transform}
+@media (max-width:900px){.pd-discover span{transform:translate3d(calc(var(--dx,0) * 120vw + 40vw),0,0)}}
+
+/* ============ Vinné řady (3 × 3 lahve, vodorovně) ============ */
+.series{position:relative;background:var(--paper)}
+.series-pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.series-track{display:flex;height:100%;will-change:transform}
+.series-panel{position:relative;flex:0 0 86vw;height:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:clamp(24px,4vw,80px);padding:clamp(90px,12vh,140px) clamp(30px,4vw,80px) clamp(40px,6vh,70px) var(--pad);border-left:1px solid var(--ink,#1d1a17)}
+.series-panel:first-child{border-left:0}
+.series-bg{position:absolute;left:-6%;bottom:-8%;width:46%;opacity:.07;pointer-events:none;filter:grayscale(1)}
+.series-bg img{width:100%;height:auto;display:block}
+.series-head{position:relative}
+.series-head h2{font-size:clamp(44px,4.6vw,86px);line-height:.98;margin:14px 0 0}
+.series-no{display:block;font-style:normal}
+.series-head h2 em{font-style:italic}
+.series-body{position:relative;display:flex;flex-direction:column;min-height:0}
+.series-text{font-size:clamp(16px,1.25vw,20px);line-height:1.6;max-width:44ch;color:#433b34;margin:8px 0 0}
+.series-bottles{list-style:none;margin:auto 0 0;padding:clamp(20px,4vh,40px) 0 0;display:flex;align-items:flex-end;gap:clamp(18px,2.6vw,46px);height:min(56vh,560px)}
+.series-bottles li{height:100%}
+.series-bottles a{display:flex;align-items:flex-end;height:100%}
+.series-bottle{height:100%;width:auto;max-width:none;object-fit:contain;filter:drop-shadow(14px 18px 16px rgba(40,30,20,.2)) drop-shadow(2px 4px 4px rgba(40,30,20,.14));transition:transform .9s var(--ease)}
+.series-info{display:flex;flex-direction:column;gap:3px;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;padding-bottom:12%;transform:translateX(-12px);transition:max-width .8s var(--ease),opacity .5s var(--ease),transform .8s var(--ease),padding-left .8s var(--ease)}
+.series-info b{font-weight:600;font-size:17px}.series-info span{font-weight:600;font-size:17px}.series-info small{color:var(--muted);font-size:13px}
+.series-bottles a:hover .series-info,.series-bottles a:focus-visible .series-info{max-width:180px;opacity:1;transform:none;padding-left:clamp(14px,1.4vw,24px)}
+.series-bottles a:hover .series-bottle{transform:translateY(-8px)}
+.series-head .text-link{display:inline-flex;margin-top:28px}
+@media (max-width:900px){
+ .series-pin{position:relative;height:auto;overflow:visible}
+ .series-track{display:block;transform:none!important}
+ .series-panel{display:block;height:auto;padding:72px var(--pad) 56px;border-left:0;border-top:1px solid var(--line)}
+ .series-panel:first-child{border-top:0}
+ .series-bg{width:90%;left:auto;right:-20%;bottom:auto;top:20px}
+ .series-text{margin:18px 0 0}
+ .series-bottles{height:auto;gap:12px;justify-content:space-between;padding-top:34px}
+ .series-bottles li{flex:1 1 0;height:auto}
+ .series-bottles a{flex-direction:column;align-items:center;text-align:center}
+ .series-bottle{height:min(46vw,260px)}
+ .series-info{max-width:none;opacity:1;transform:none;padding:14px 0 0;white-space:normal}
+ .series-info b,.series-info span{font-size:14px}.series-info small{font-size:11.5px}
+}
+@media (prefers-reduced-motion:reduce) and (min-width:901px){
+ .series-pin{position:relative;height:auto}.series-track{flex-direction:column;transform:none!important}.series-panel{flex-basis:auto;min-height:100svh;border-left:0;border-top:1px solid var(--line)}
+}
+
+/* výběr podle chuti: konkrétní lahve kategorie */
+.cat-float.cf-bottles{background:var(--paper);box-shadow:0 30px 60px -30px rgba(40,30,20,.35);overflow:hidden}
+.cf-w{position:absolute;inset:0;opacity:0;transition:opacity .45s var(--ease)}
+.cf-w.show{opacity:1}
+.cat-float .cf-w .cf-il{right:auto;bottom:auto;position:absolute;left:50%;top:44%;width:120%;height:auto;transform:translate(-50%,-50%) scale(1.06);opacity:.45;transition:transform 1.4s var(--ease)}
+.cat-float .cf-w img{inset:auto;object-fit:contain}
+.cat-float .cf-w .cf-b{opacity:1;top:auto;right:auto;position:absolute;left:50%;bottom:13%;height:74%;width:auto;max-width:none;transform:translateX(-50%) translateY(14px);filter:drop-shadow(0 18px 14px rgba(40,30,20,.22));transition:transform .9s var(--ease)}
+.cat-float .cf-w.show .cf-b{transform:translateX(-50%)}.cat-float .cf-w.show .cf-il{transform:translate(-50%,-50%)}
+.cf-w small{position:absolute;left:0;right:0;bottom:5%;text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.series-panel{overflow:clip}
+/* realistické soutěžní nálepky: větší, ať jde přečíst */
+.award .medal-ic{width:68px;height:68px;filter:drop-shadow(0 4px 6px rgba(40,30,20,.18))}
+.award-list .medal-ic{width:72px;height:72px}
+.pd-hero .pd-medal .medal-ic{width:64px;height:64px}
+.badge.medal .medal-ic{width:30px;height:30px}
+@media (max-width:760px){.award .medal-ic{width:56px;height:56px}}
+/* Ogg (Adobe Fonts) má jen Regular + Italic: žádné dopočítané tučné řezy */
+html{font-synthesis-weight:none}
+h1,h2,.spotlight-title,.quiz-q,.cl-name,.tl-year,.exp-card h3,.review blockquote,.story-copy blockquote p,.intro h2,.page-top h1,.footer-top h2,.age-box h2,.big-price,.pd-hero h1,.pd-quote blockquote,.pd-discover span,.series-head h2,.wine-pd .big-price{font-weight:400}
+h1 em,h2 em{font-weight:400}
+/* hero: tmavší podklad pod bílými texty */
+.hp-bg:after{background:radial-gradient(ellipse 62% 34% at 50% 36%,rgba(18,14,10,.42) 0%,rgba(18,14,10,.18) 60%,rgba(18,14,10,0) 100%),linear-gradient(180deg,rgba(18,14,10,.5) 0%,rgba(18,14,10,.12) 45%,rgba(18,14,10,.12) 60%,rgba(18,14,10,.5) 100%)}
+.hp-copy h1{text-shadow:0 2px 40px rgba(0,0,0,.45),0 1px 4px rgba(0,0,0,.25)}
+.hp-copy .eyebrow{opacity:1;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.hp-cta .hero-text{text-shadow:0 1px 18px rgba(0,0,0,.55)}
+/* patička: velké logo jako okno do krajiny (paralaxa) */
+.footer-wordmark.fw-photo{display:block}
+.fw-mask{position:relative;display:block;width:100%;aspect-ratio:101.5/33;overflow:hidden;background:#2e2d29;
+ -webkit-mask:url(./assets/brave-winery-logo.svg) center/100% 100% no-repeat;mask:url(./assets/brave-winery-logo.svg) center/100% 100% no-repeat}
+.fw-img{position:absolute;left:0;right:0;top:-35%;height:170%;background:#3a3a30 url(./assets/m/hero-bg.webp) 50% 45%/cover no-repeat;transform:translate3d(0,var(--fy,0px),0) scale(1.02);will-change:transform}
+@media (max-width:760px){.fw-img{background-image:url(./assets/m/hero-bg-s.webp)}}
+/* hero v2: nadpis hned nad odstavcem, bez ztmavení nahoře */
+.hp-bg:after{background:linear-gradient(0deg,rgba(18,14,10,.55) 0%,rgba(18,14,10,.3) 38%,rgba(18,14,10,0) 62%)}
+.hp-copy{top:auto;bottom:calc(clamp(80px,13vh,130px) + var(--cta-h,170px) + 8px)}
+.hp-copy h1{margin-bottom:0}
+.hp-bg:after{background:linear-gradient(180deg,rgba(18,14,10,.32) 0%,rgba(18,14,10,0) 17%),linear-gradient(0deg,rgba(18,14,10,.55) 0%,rgba(18,14,10,.3) 38%,rgba(18,14,10,0) 62%)}
+.hp-copy{bottom:calc(clamp(80px,13vh,130px) + var(--cta-h,170px) + clamp(22px,3.5vh,40px))}
