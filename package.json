@@ -1,0 +1,15 @@
+{
+  "name": "brave-winery",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Brave Winery – front-end prototyp e-shopu vinařství (statický web v dist/)",
+  "scripts": {
+    "start": "node serve.mjs 5370",
+    "test": "node tools/test.mjs",
+    "shots": "node tools/shots.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.56.1"
+  }
+}

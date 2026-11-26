@@ -2,8 +2,10 @@
 //   node tools/shots.mjs <název> <hash|cesta> [--m] [--full] [--y=0,900,1800] [--style=interior] [--click=selektor]
 import {createRequire} from 'node:module';
 import {mkdirSync} from 'node:fs';
-const require=createRequire('C:/Users/Omen/Documents/claude/braveshop-redesign/package.json');
-const {chromium}=require('playwright-core');
+// playwright-core: z node_modules projektu (npm install), jinak z lokální instalace autora
+const require=createRequire(new URL('../package.json',import.meta.url));
+let pwRequire=require;try{require.resolve('playwright-core')}catch{pwRequire=createRequire('C:/Users/Omen/Documents/claude/braveshop-redesign/package.json')}
+const {chromium}=pwRequire('playwright-core');
 const args=process.argv.slice(2);
 const name=args[0]||'shot',route=args[1]||'#home';
 const flag=k=>args.find(a=>a.startsWith('--'+k));
@@ -13,7 +15,7 @@ const ys=(val('y')||'0').split(',').map(Number);
 const style=val('style')||'winery';
 const B=process.env.B||'http://127.0.0.1:5370/';
 mkdirSync('shots',{recursive:true});
-const browser=await chromium.launch({channel:'msedge',headless:true});
+const browser=await chromium.launch({channel:process.env.PW_CHANNEL||'msedge',headless:true});
 const ctx=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1440,height:900},deviceScaleFactor:1,isMobile:mobile,hasTouch:mobile});
 const page=await ctx.newPage();
 const errs=[];page.on('pageerror',e=>errs.push(e.message));page.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
